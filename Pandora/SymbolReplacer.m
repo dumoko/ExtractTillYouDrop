@@ -42,11 +42,7 @@
         if (![self.alreadyReplaced containsObject:match]) {
             [self.alreadyReplaced addObject:match];
             NSString *replaceTarget = [NSString stringWithFormat:@"$%@", match];
-            NSRange firstOccurence = [self.stringToReplace rangeOfString:replaceTarget];
-            self.stringToReplace = [self.stringToReplace stringByReplacingOccurrencesOfString:replaceTarget
-                                                                                   withString:[self translate:match]
-                                                                                      options:0
-                                                                                        range:firstOccurence];
+            self.stringToReplace = [self.stringToReplace stringByReplacingOccurrencesOfString:replaceTarget withString:[self translate:match]];
         }
     }
 
