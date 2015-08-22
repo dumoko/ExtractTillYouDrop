@@ -1,6 +1,6 @@
 //
-//  PandoraTests.m
-//  PandoraTests
+//  SymbolReplacerTests.m
+//  Pandora
 //
 //  Created by Olegas on 22/08/2015.
 //  Copyright (c) 2015 SkyOffice. All rights reserved.
@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "SymbolReplacer.h"
 
-@interface PandoraTests : XCTestCase
+@interface SymbolReplacerTests : XCTestCase
 
 @end
 
-@implementation PandoraTests
+@implementation SymbolReplacerTests
 
 - (void)setUp {
     [super setUp];
@@ -26,15 +27,9 @@
 }
 
 - (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
-}
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+    SymbolReplacer *replacer = [[SymbolReplacer alloc] initWithStringToReplace:@"$rerd$eeer$Aa$rew$oo$ee$.."];
+    NSString *actual = [replacer replace];
+    XCTAssertTrue([actual isEqualToString:@"RErdEEer$Aa$rewOO$ee$.."]);
 }
 
 @end

@@ -7,13 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5809901D1B87E21000B7FB21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5809901C1B87E21000B7FB21 /* Foundation.framework */; };
+		5809902B1B87ECC000B7FB21 /* SymbolReplacer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5809902A1B87ECC000B7FB21 /* SymbolReplacer.m */; };
+		5809902C1B87ECC000B7FB21 /* SymbolReplacer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5809902A1B87ECC000B7FB21 /* SymbolReplacer.m */; };
+		5809902E1B87F16F00B7FB21 /* SymbolReplacerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5809902D1B87F16F00B7FB21 /* SymbolReplacerTests.m */; };
 		5851B8601B87DBA800E42BA1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5851B85F1B87DBA800E42BA1 /* main.m */; };
 		5851B8631B87DBA800E42BA1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5851B8621B87DBA800E42BA1 /* AppDelegate.m */; };
 		5851B8661B87DBA800E42BA1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5851B8651B87DBA800E42BA1 /* ViewController.m */; };
 		5851B8691B87DBA800E42BA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5851B8671B87DBA800E42BA1 /* Main.storyboard */; };
 		5851B86B1B87DBA800E42BA1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5851B86A1B87DBA800E42BA1 /* Images.xcassets */; };
 		5851B86E1B87DBA800E42BA1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5851B86C1B87DBA800E42BA1 /* LaunchScreen.xib */; };
-		5851B87A1B87DBA800E42BA1 /* PandoraTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5851B8791B87DBA800E42BA1 /* PandoraTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +30,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5809901C1B87E21000B7FB21 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		580990291B87ECC000B7FB21 /* SymbolReplacer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SymbolReplacer.h; sourceTree = "<group>"; };
+		5809902A1B87ECC000B7FB21 /* SymbolReplacer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SymbolReplacer.m; sourceTree = "<group>"; };
+		5809902D1B87F16F00B7FB21 /* SymbolReplacerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SymbolReplacerTests.m; sourceTree = "<group>"; };
 		5851B85A1B87DBA800E42BA1 /* Pandora.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pandora.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5851B85E1B87DBA800E42BA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5851B85F1B87DBA800E42BA1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -39,7 +46,6 @@
 		5851B86D1B87DBA800E42BA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		5851B8731B87DBA800E42BA1 /* PandoraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PandoraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5851B8781B87DBA800E42BA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5851B8791B87DBA800E42BA1 /* PandoraTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PandoraTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5809901D1B87E21000B7FB21 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,9 +70,11 @@
 		5851B8511B87DBA800E42BA1 = {
 			isa = PBXGroup;
 			children = (
+				5809901C1B87E21000B7FB21 /* Foundation.framework */,
 				5851B85C1B87DBA800E42BA1 /* Pandora */,
 				5851B8761B87DBA800E42BA1 /* PandoraTests */,
 				5851B85B1B87DBA800E42BA1 /* Products */,
+				C537EA46FF39FE40EB55FD81 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,6 +94,8 @@
 				5851B8621B87DBA800E42BA1 /* AppDelegate.m */,
 				5851B8641B87DBA800E42BA1 /* ViewController.h */,
 				5851B8651B87DBA800E42BA1 /* ViewController.m */,
+				580990291B87ECC000B7FB21 /* SymbolReplacer.h */,
+				5809902A1B87ECC000B7FB21 /* SymbolReplacer.m */,
 				5851B8671B87DBA800E42BA1 /* Main.storyboard */,
 				5851B86A1B87DBA800E42BA1 /* Images.xcassets */,
 				5851B86C1B87DBA800E42BA1 /* LaunchScreen.xib */,
@@ -105,7 +116,7 @@
 		5851B8761B87DBA800E42BA1 /* PandoraTests */ = {
 			isa = PBXGroup;
 			children = (
-				5851B8791B87DBA800E42BA1 /* PandoraTests.m */,
+				5809902D1B87F16F00B7FB21 /* SymbolReplacerTests.m */,
 				5851B8771B87DBA800E42BA1 /* Supporting Files */,
 			);
 			path = PandoraTests;
@@ -117,6 +128,13 @@
 				5851B8781B87DBA800E42BA1 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C537EA46FF39FE40EB55FD81 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,6 +240,7 @@
 				5851B8661B87DBA800E42BA1 /* ViewController.m in Sources */,
 				5851B8631B87DBA800E42BA1 /* AppDelegate.m in Sources */,
 				5851B8601B87DBA800E42BA1 /* main.m in Sources */,
+				5809902B1B87ECC000B7FB21 /* SymbolReplacer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,7 +248,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5851B87A1B87DBA800E42BA1 /* PandoraTests.m in Sources */,
+				5809902E1B87F16F00B7FB21 /* SymbolReplacerTests.m in Sources */,
+				5809902C1B87ECC000B7FB21 /* SymbolReplacer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
