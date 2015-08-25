@@ -11,8 +11,8 @@
 @interface SymbolReplacer ()
 
 @property (nonatomic, copy) NSString *stringToReplace;
-@property (nonatomic, copy) NSMutableArray *alreadyReplaced;
-@property (nonatomic, copy) NSRegularExpression *regex;
+//@property (nonatomic, copy) NSMutableArray *alreadyReplaced;
+//@property (nonatomic, copy) NSRegularExpression *regex;
 
 @end
 
@@ -24,84 +24,83 @@
     self = [super init];
     if (self) {
         _stringToReplace = stringToReplace;
-        _alreadyReplaced = [NSMutableArray array];
-        NSString *pattern = @"\\$([a-z]{2})";
-        _regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:nil];
     }
-
     return self;
+}
+
+- (NSRegularExpression *)regex {
+    NSString *pattern = @"\\$([a-z]{2})";
+    
+    return [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:nil];
 }
 
 
 - (NSString *)replace {
-    [self replaceAllOccurrences];
-    return self.stringToReplace;
+    return [self replaceAllOccurrencesInString:self.stringToReplace usingRegex:[self regex]];
 }
 
 
 #pragma mark - Private Methods
 
-- (void)replaceAllOccurrences {
-    for (NSString *match in [self findMatchingResults]) {
-        [self replaceAllinstancesForMatch:match];
+- (NSString *)replaceAllOccurrencesInString:(NSString *)string usingRegex:(NSRegularExpression *)regex {
+    for (NSString *match in [self findMatchingResultsInString:string withRegex:regex]) {
+        string = [self stringByReplacingAllInstancesOfMatch:match inString:string];
     }
+    
+    return string;
 }
 
 
-- (void)replaceAllinstancesForMatch:(NSString *)match {
-    if ([self shouldReplaceMatch:match]) {
-        [self replaceMatch:match];
+- (NSString *)stringByReplacingAllInstancesOfMatch:(NSString *)match inString:(NSString *)stringToReplace {
+    NSMutableArray *matches = [[NSMutableArray alloc] init];
+    if (![matches containsObject:match]) {
+        [matches addObject:match];
+        return [self stringByReplacingMatch:match inString:stringToReplace];
     }
+    
+    return stringToReplace;
 }
 
 
-- (NSArray *)findMatchingResults {
+- (NSArray *)findMatchingResultsInString:(NSString *)stringToFind withRegex:(NSRegularExpression *)regex {
     NSMutableArray *matches = [NSMutableArray array];
-    for (NSTextCheckingResult *result in [self findTextCheckingResultsByRegex]) {
-        [matches addObject:[self.stringToReplace substringWithRange:[self firstRangeFromTextCheckingResult:result]]];
+    for (NSTextCheckingResult *result in [self matchesInString:stringToFind usingRegex:regex]) {
+        [matches addObject:[stringToFind substringWithRange:[self firstRangeFromTextCheckingResult:result]]];
     }
-
+    
     return matches;
 }
 
 
-- (BOOL)shouldReplaceMatch:(NSString *)match {
-
-    return ![self.alreadyReplaced containsObject:match];
-}
-
-
-- (void)replaceMatch:(NSString *)match {
-    [self.alreadyReplaced addObject:match];
-    self.stringToReplace = [self.stringToReplace stringByReplacingOccurrencesOfString:[self replaceTargetForMatch:match] withString:[self translate:match]];
+- (NSString *)stringByReplacingMatch:(NSString *)match inString:(NSString *)string {
+    return [string stringByReplacingOccurrencesOfString:[self replaceTargetForMatch:match]
+                                             withString:[self translate:match]];
 }
 
 
 - (NSString *)replaceTargetForMatch:(NSString *)match {
-
     return [NSString stringWithFormat:@"$%@", match];
 }
 
-- (NSArray *)findTextCheckingResultsByRegex {
 
-    return [self.regex matchesInString:self.stringToReplace options:0 range:[self calculateRangeOfStringToReplace]];
+- (NSArray *)matchesInString:(NSString *)string usingRegex:(NSRegularExpression *)regex {
+    return [regex matchesInString:string
+                          options:0
+                            range:[self rangeOfString:string]];
 }
 
 
 - (NSRange)firstRangeFromTextCheckingResult:(NSTextCheckingResult *)result {
-
     return [result rangeAtIndex:1];
 }
 
 
-- (NSRange)calculateRangeOfStringToReplace {
-
-    return NSMakeRange(0, self.stringToReplace.length);
+- (NSRange)rangeOfString:(NSString *)string {
+    return NSMakeRange(0, string.length);
 }
 
 
 - (NSString *)translate:(NSString *)string {
-
     return [string uppercaseString];
 }
 
