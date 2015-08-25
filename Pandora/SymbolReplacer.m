@@ -32,7 +32,7 @@
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:nil];
     NSRange fullStringRange = NSMakeRange(0, self.stringToReplace.length);
     NSArray *results = [regex matchesInString:self.stringToReplace options:0 range:fullStringRange];
-    NSMutableArray *matches = [NSMutableArray arrayWithCapacity:results.count];
+    NSMutableArray *matches = [NSMutableArray array];
     for (NSTextCheckingResult *result in results) {
         NSRange matchRange = [result rangeAtIndex:1];
         [matches addObject:[self.stringToReplace substringWithRange:matchRange]];
