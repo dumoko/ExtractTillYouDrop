@@ -18,6 +18,8 @@
 
 @implementation SymbolReplacer
 
+#pragma mark - Public Methods
+
 - (instancetype)initWithStringToReplace:(NSString *)stringToReplace {
     self = [super init];
     if (self) {
@@ -30,16 +32,26 @@
     return self;
 }
 
-- (NSString *)replace {
-    for (NSString *match in [self findMatchingResults]) {
-        if (![self.alreadyReplaced containsObject:match]) {
-            [self.alreadyReplaced addObject:match];
-            NSString *replaceTarget = [NSString stringWithFormat:@"$%@", match];
-            self.stringToReplace = [self.stringToReplace stringByReplacingOccurrencesOfString:replaceTarget withString:[self translate:match]];
-        }
-    }
 
+- (NSString *)replace {
+    [self replaceAllOccurrences];
     return self.stringToReplace;
+}
+
+
+#pragma mark - Private Methods
+
+- (void)replaceAllOccurrences {
+    for (NSString *match in [self findMatchingResults]) {
+        [self replaceAllinstancesForMatch:match];
+    }
+}
+
+
+- (void)replaceAllinstancesForMatch:(NSString *)match {
+    if ([self shouldReplaceMatch:match]) {
+        [self replaceMatch:match];
+    }
 }
 
 
@@ -53,16 +65,38 @@
 }
 
 
-- (NSArray *)findTextCheckingResultsByRegex {
-    NSRange fullStringRange = NSMakeRange(0, self.stringToReplace.length);
+- (BOOL)shouldReplaceMatch:(NSString *)match {
 
-    return [self.regex matchesInString:self.stringToReplace options:0 range:fullStringRange];
+    return ![self.alreadyReplaced containsObject:match];
+}
+
+
+- (void)replaceMatch:(NSString *)match {
+    [self.alreadyReplaced addObject:match];
+    self.stringToReplace = [self.stringToReplace stringByReplacingOccurrencesOfString:[self replaceTargetForMatch:match] withString:[self translate:match]];
+}
+
+
+- (NSString *)replaceTargetForMatch:(NSString *)match {
+
+    return [NSString stringWithFormat:@"$%@", match];
+}
+
+- (NSArray *)findTextCheckingResultsByRegex {
+
+    return [self.regex matchesInString:self.stringToReplace options:0 range:[self calculateRangeOfStringToReplace]];
 }
 
 
 - (NSRange)firstRangeFromTextCheckingResult:(NSTextCheckingResult *)result {
 
     return [result rangeAtIndex:1];
+}
+
+
+- (NSRange)calculateRangeOfStringToReplace {
+
+    return NSMakeRange(0, self.stringToReplace.length);
 }
 
 
