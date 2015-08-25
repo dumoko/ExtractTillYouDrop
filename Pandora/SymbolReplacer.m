@@ -44,20 +44,30 @@
 
 
 - (NSArray *)findMatchingResults {
-    NSRange fullStringRange = NSMakeRange(0, self.stringToReplace.length);
-    NSArray *results = [self.regex matchesInString:self.stringToReplace options:0 range:fullStringRange];
     NSMutableArray *matches = [NSMutableArray array];
-    for (NSTextCheckingResult *result in results) {
-        NSRange matchRange = [result rangeAtIndex:1];
-        [matches addObject:[self.stringToReplace substringWithRange:matchRange]];
+    for (NSTextCheckingResult *result in [self findTextCheckingResultsByRegex]) {
+        [matches addObject:[self.stringToReplace substringWithRange:[self firstRangeFromTextCheckingResult:result]]];
     }
 
     return matches;
 }
 
 
+- (NSArray *)findTextCheckingResultsByRegex {
+    NSRange fullStringRange = NSMakeRange(0, self.stringToReplace.length);
+
+    return [self.regex matchesInString:self.stringToReplace options:0 range:fullStringRange];
+}
+
+
+- (NSRange)firstRangeFromTextCheckingResult:(NSTextCheckingResult *)result {
+
+    return [result rangeAtIndex:1];
+}
+
+
 - (NSString *)translate:(NSString *)string {
-    
+
     return [string uppercaseString];
 }
 
